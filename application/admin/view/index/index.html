@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lchat 后台管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" type="text/css" href="__COMMON__/layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="__COMMON__/bootstrap/css/bootstrap.css" media="all">
+    <link rel="stylesheet" type="text/css" href="__COMMON__/global.css">
+    <link rel="stylesheet" type="text/css" href="__CSS__/main.css">
+    <style>
+        .layui-elem-field{width: 99%}
+        .layui-elem-field legend{font-size: 14px}
+        .personal-task td,div{font-size:14px}
+    </style>
+</head>
+<body>
+<section class="larry-wrapper">
+
+    <div class="row">
+        <div class="col-lg-6">
+            <section class="panel">
+                <header class="panel-heading bm0">
+                    <span class='span-title'>系统概览</span>
+                    <span class="tools pull-right"><a href="javascript:;" class="iconpx-chevron-down"></a></span>
+                </header>
+                <div class="panel-body" >
+                    <table class="table table-hover personal-task">
+                        <tbody>
+                            <tr>
+                                <td>网站域名</td>
+                                <td>{$config.url}</td>
+                            </tr>
+                            <tr>
+                                <td>网站目录</td>
+                                <td>{$config.document_root}</td>
+                            </tr>
+                            <tr>
+                                <td>服务器操作系统</td>
+                                <td>{$config.server_os}</td>
+                            </tr>
+                            <tr>
+                                <td>服务器端口</td>
+                                <td>{$config.server_port}</td>
+                            </tr>
+                            <tr>
+                                <td>服务器IP</td>
+                                <td>{$config.server_ip}</td>
+                            </tr>
+                            <tr>
+                                <td>服务器环境</td>
+                                <td>{$config.server_soft}</td>
+                            </tr>
+                            <tr>
+                                <td>PHP版本</td>
+                                <td>{$config.php_version}</td>
+                            </tr>
+                            <tr>
+                                <td>MySQL版本</td>
+                                <td>{$config.mysql_version}</td>
+                            </tr>
+                            <tr>
+                                <td>最大上传限制</td>
+                                <td>{$config.max_upload_size}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- <div class="col-lg-6">
+            <blockquote class="layui-elem-quote mylog-info-tit" style="background: white;font-size: 14px">
+                关于作者
+            </blockquote>
+            <blockquote class="layui-elem-quote layui-quote-nm" style="background: white">
+                <fieldset class="layui-elem-field" style="margin-top: 15px;">
+                    <legend>介绍</legend>
+                    <div class="layui-field-box">
+                        一个热爱技术的小菜鸟<br/>邮箱：1902822973@qq.com
+                    </div>
+                </fieldset>
+                <fieldset class="layui-elem-field">
+                    <legend>个人github</legend>
+                    <div class="layui-field-box">
+                        https://github.com/nick-bai/
+                    </div>
+                </fieldset>
+                <fieldset class="layui-elem-field">
+                    <legend>个人博客</legend>
+                    <div class="layui-field-box">
+                        http://www.cnblogs.com/nickbai/
+                    </div>
+                </fieldset>
+                <fieldset class="layui-elem-field">
+                    <legend>本项目</legend>
+                    <div class="layui-field-box">
+                        本项目是采用的layIM v3.0版+thinkphp5+workerman+layui,重构的第3版。因此叫
+                        laychat-v3.0。<br/>后台模板采用的是larryCMS
+                    </div>
+                </fieldset>
+            </blockquote>
+        </div> -->
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>群组列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" type="text/css" href="__COMMON__/layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="__COMMON__/bootstrap/css/bootstrap.css" media="all">
+    <link rel="stylesheet" type="text/css" href="__COMMON__/global.css" media="all">
+    <link rel="stylesheet" type="text/css" href="__CSS__/personal.css" media="all">
+</head>
+<body>
+<section class="layui-larry-box">
+    <div class="larry-personal">
+        <div class="layui-tab">
+            <blockquote class="layui-elem-quote mylog-info-tit">
+                <form class="layui-form layui-form-pane" action="{:url('group/index')}" method="get">
+                    <div class="layui-inline">
+                        <div class="layui-input-inline">
+                            <input name="group_name" value="{$gname}" placeholder="请输入群组名称" class="layui-input" type="text">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <button class="layui-btn" style="font-size:14px">查询</button>
+                    </div>
+                </form>
+            </blockquote>
+            <div class="larry-separate"></div>
+            <div class="layui-tab-content larry-personal-body clearfix mylog-info-box">
+                <!-- 操作日志 -->
+                <div class="layui-tab-item layui-field-box layui-show">
+                    <table class="layui-table table-hover" lay-even="" lay-skin="nob">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>群组ID</th>
+                            <th>群组名称</th>
+                            <th>群组管理员</th>
+                            <th>群组头像</th>
+                            <th>创建时间</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {if !empty($list)}
+                        {foreach name="list" item="vo"}
+                        <tr>
+                            <td></td>
+                            <td>{$vo.id}</td>
+                            <td>{$vo.group_name}</td>
+                            <td>{$vo.owner_name}</td>
+                            <td><img src="{$vo.avatar}" width="40px" height="40px"></td>
+                            <td>{$vo.addtime|date="Y-m-d H:i:s", ###}</td>
+                            <td>
+                                {if condition="$vo['status'] eq -2"}
+                                <span style="color: red">{$status[$vo['status']]}</span>
+                                {else/}
+                                {$status[$vo['status']]}
+                                {/if}
+                            </td>
+                            <td>
+                                {if condition="$vo['status'] eq 1"}
+                                -
+                                {else /}
+                                <button class="layui-btn layui-btn-small" style="font-size:14px" onclick="pass({$vo.id})">审核</button>
+                                {/if}
+                            </td>
+                        </tr>
+                        {/foreach}
+                        {/if}
+                        </tbody>
+                    </table>
+                    <span style="float: left;margin-top:34px">共 {$total} 条</span>
+                    <div style="float: right">{$list->render()}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript" src="__COMMON__/layui/layui.js"></script>
+<script type="text/javascript">
+    var pass_url = "{:url('group/pass')}";
+    function pass(id){
+        layui.use(['layer', 'jquery'], function(){
+            var layer = layui.layer,
+                $ = layui.jquery;
+            layer.ready(function(){
+                //询问框
+                layer.confirm('是否通过审核？', {
+                    closeBtn: 0,
+                    icon: 3,
+                    title: '友情提示',
+                    btn: ['通过','不通过'] //按钮
+                }, function(){
+                    $.post(pass_url, {'id' : id, 'status' : 1}, function(res){
+                        if(1 == res.code){
+                            layer.msg(res.msg, {time:2000});
+                            setTimeout(function(){
+                                window.location.reload();
+                            }, 1500);
+                        }else{
+                            layer.msg(res.msg, {time:2000});
+                        }
+                    }, 'json');
+                }, function(){
+                    $.post(pass_url, {'id' : id, 'status' : -2}, function(res){
+                        if(1 == res.code){
+                            layer.msg(res.msg, {time:2000});
+                            setTimeout(function(){
+                                window.location.reload();
+                            }, 1500);
+                        }else{
+                            layer.msg(res.msg, {time:2000});
+                        }
+                    }, 'json');
+                });
+            });
+        }) ;
+    }
+</script>
+</body>
+</html>

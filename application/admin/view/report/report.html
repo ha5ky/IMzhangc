@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>举报列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" type="text/css" href="__COMMON__/layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="__COMMON__/bootstrap/css/bootstrap.css" media="all">
+    <link rel="stylesheet" type="text/css" href="__COMMON__/global.css" media="all">
+    <link rel="stylesheet" type="text/css" href="__CSS__/personal.css" media="all">
+</head>
+<body>
+<section class="layui-larry-box">
+    <div class="larry-personal">
+        <div class="layui-tab">
+            <blockquote class="layui-elem-quote mylog-info-tit">
+                <form class="layui-form layui-form-pane" action="{:url('report/index')}" method="get">
+                    <div class="layui-inline">
+                        <div class="layui-input-inline">
+                            <input name="user_name" value="{$uname}" placeholder="请输入举报人姓名" class="layui-input" type="text">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <button class="layui-btn" style="font-size:14px">查询</button>
+                    </div>
+                </form>
+            </blockquote>
+            <div class="larry-separate"></div>
+            <div class="layui-tab-content larry-personal-body clearfix mylog-info-box">
+                <!-- 操作日志 -->
+                <div class="layui-tab-item layui-field-box layui-show">
+                    <table class="layui-table table-hover" lay-even="" lay-skin="nob">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>举报人ID</th>
+                            <th>举报人名称</th>
+                            <th>被举报人ID</th>
+                            <th>被举报人名称</th>
+                            <th>举报类型</th>
+                            <th>举报详情</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {if !empty($list)}
+                        {foreach name="list" item="vo"}
+                        <tr>
+                            <td></td>
+                            <td>{$vo.report_uid}</td>
+                            <td>{$vo.report_user}</td>
+                            <td>{$vo.reported_uid}</td>
+                            <td>{$vo.reported_user}</td>
+                            <td>{$vo.report_type}</td>
+                            <td>{$vo.report_detail}</td>
+                            <td>
+                                <button class="layui-btn layui-btn-small" style="font-size:12px" onclick="show_tips({$vo.id})">查看证据</button>
+                            </td>
+                        </tr>
+                        {/foreach}
+                        {/if}
+                        </tbody>
+                    </table>
+                    <span style="float: left;margin-top:34px">共 {$total} 条</span>
+                    <div style="float: right">{$list->render()}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript" src="__COMMON__/layui/layui.js"></script>
+<script type="text/javascript">
+    function show_tips(id){
+        layui.use(['layer', 'jquery'], function(){
+            var layer = layui.layer,
+                    $ = layui.jquery;
+            layer.open({
+                type: 2,
+                title: '查看举报证据',
+                shadeClose: true,
+                shade: 0.2,
+                skin: 'layui-layer-molv',
+                area: ['750px', '500px'],
+                content: '/admin/report/seeDetail/id/' + id //iframe的url
+            });
+
+        });
+    }
+</script>
+</body>
+</html>

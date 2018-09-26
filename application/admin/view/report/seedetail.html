@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查看证据</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" type="text/css" href="__COMMON__/layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="__COMMON__/bootstrap/css/bootstrap.css" media="all">
+    <link rel="stylesheet" type="text/css" href="__COMMON__/global.css" media="all">
+    <link rel="stylesheet" type="text/css" href="__CSS__/personal.css" media="all">
+</head>
+<body>
+<section class="layui-larry-box">
+    <div class="larry-personal">
+        <div class="layui-tab">
+            <blockquote class="layui-elem-quote mylog-info-tit" style="font-size: 14px">
+                被举报人 -> 给举报人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最近发出的消息
+            </blockquote>
+            <div class="larry-separate"></div>
+            <div class="layui-tab-content larry-personal-body clearfix mylog-info-box">
+                <!-- 操作日志 -->
+                <div class="layui-tab-item layui-field-box layui-show">
+                    <table class="layui-table table-hover" lay-even="" lay-skin="nob">
+                        <tbody>
+                        {if !empty($detail)}
+                        {foreach name="detail" item="vo"}
+                        <blockquote class="layui-elem-quote layui-quote-nm" style="font-size: 14px;margin-top: 5px">
+                           {$vo.content}
+                        </blockquote>
+                        {/foreach}
+                        {else/}
+                        <span style="color: red;margin-left:37%;font-size: 14px">暂无聊天记录作为证据</span>
+                        {/if}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript" src="__COMMON__/layui/layui.js"></script>
+
+</body>
+</html>
