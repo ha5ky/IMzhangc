@@ -1,2 +1,2 @@
 The instant messaging platform of zhangc
-support by thinkphp5.0.20
+supported by thinkphp5.0.20
